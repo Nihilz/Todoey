@@ -43,6 +43,13 @@ class CategoryViewController: UITableViewController {
         performSegue(withIdentifier: "GoToItems", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let destinationVC = segue.destination as! TodoListViewController
+        
+        if let indexPath = tableView.indexPathForSelectedRow {
+            destinationVC.selectedCategory = categories[indexPath.row]
+        }
+    }
     
     //MARK:- Model Manipulation Methods
     func saveCategories(){
