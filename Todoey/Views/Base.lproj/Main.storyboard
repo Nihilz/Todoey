@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Category View Controller-->
+        <!--Todoey-->
         <scene sceneID="hvb-3l-arX">
             <objects>
                 <tableViewController id="yce-UO-xwn" customClass="CategoryViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -32,7 +32,7 @@
                             <outlet property="delegate" destination="yce-UO-xwn" id="Nz9-3u-1li"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="sbQ-dO-uYm">
+                    <navigationItem key="navigationItem" title="Todoey" id="sbQ-dO-uYm">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Tog-IU-gh5">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -41,14 +41,14 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="Pen-C8-4GE" kind="show" identifier="GoToItems" id="c9X-t9-HR4"/>
+                        <segue destination="Pen-C8-4GE" kind="show" identifier="GoToItems" id="c5Q-dD-fpI"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fmu-xC-r3E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1167" y="134"/>
+            <point key="canvasLocation" x="1105" y="134"/>
         </scene>
-        <!--Todoey-->
+        <!--Items-->
         <scene sceneID="FR5-3r-Au2">
             <objects>
                 <tableViewController id="Pen-C8-4GE" customClass="TodoListViewController" customModule="Todoey" customModuleProvider="target" sceneMemberID="viewController">
@@ -76,7 +76,7 @@
                             <outlet property="delegate" destination="Pen-C8-4GE" id="swc-0L-hDr"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Todoey" id="gFg-2C-d6s">
+                    <navigationItem key="navigationItem" title="Items" id="gFg-2C-d6s">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="7Bd-7c-3ek">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
@@ -104,12 +104,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="yce-UO-xwn" kind="relationship" relationship="rootViewController" id="P7B-0E-svf"/>
+                        <segue destination="yce-UO-xwn" kind="relationship" relationship="rootViewController" id="JHQ-Xf-n5I"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BR3-eD-o81" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="134"/>
+            <point key="canvasLocation" x="332" y="134"/>
         </scene>
     </scenes>
 </document>

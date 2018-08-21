@@ -17,9 +17,16 @@ class CategoryViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadCategories()
     }
     
     //MARK:- TableView Datasource Methods
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return categories.count
+    }
+    
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCell", for: indexPath)
@@ -27,10 +34,6 @@ class CategoryViewController: UITableViewController {
         cell.textLabel?.text = categories[indexPath.row].name
         
         return cell
-    }
-    
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return categories.count
     }
     
     //MARK:- TableView Delegate Methods
@@ -50,13 +53,14 @@ class CategoryViewController: UITableViewController {
         }
         
         tableView.reloadData()
+        
     }
     
     func loadCategories() {
         
         let request : NSFetchRequest<Category> = Category.fetchRequest()
         
-        do{
+        do {
             categories = try context.fetch(request)
         } catch {
             print("Error loading Categories \(error)")
