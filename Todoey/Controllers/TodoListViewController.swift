@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class TodoListViewController: UITableViewController {
+class TodoListViewController: SwipeTableViewController {
 
     var todoItems: Results<Item>?
     var realm = try! Realm()
@@ -27,11 +27,11 @@ class TodoListViewController: UITableViewController {
         
     }
 
-//MARK: - Tableview Datascoure Methods
+    //MARK: - Tableview Datascoure Methods
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoItemCell", for: indexPath)
+        let cell = super.tableView(tableView, cellForRowAt: indexPath)
         
         if let item = todoItems?[indexPath.row] {
             
@@ -39,7 +39,7 @@ class TodoListViewController: UITableViewController {
             
             cell.accessoryType = item.done ? .checkmark : .none
         } else {
-            cell.textLabel?.text = "No Items Added"
+            cell.textLabel?.text = "No Items Added Yet"
         }
         
         return cell
@@ -49,7 +49,7 @@ class TodoListViewController: UITableViewController {
         return todoItems?.count ?? 1
     }
     
-//MARK: - TableView Delegate Methods
+    //MARK: - TableView Delegate Methods
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -69,7 +69,7 @@ class TodoListViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
-//MARK: - Add New Items
+    //MARK: - Add New Items
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
         
@@ -78,7 +78,6 @@ class TodoListViewController: UITableViewController {
         let alert = UIAlertController(title: "Add New Todoey Item", message: "", preferredStyle: .alert)
         
         let action = UIAlertAction(title: "Add Item", style: .default) { (action) in
-            //what will happen once the user clicks the add item button on our UIAlert
   
             if let currentCategory = self.selectedCategory {
                 do {
@@ -92,7 +91,6 @@ class TodoListViewController: UITableViewController {
                     print("Error saving new items, \(error)")
                 }
             }
-            
             self.tableView.reloadData()
         }
         
@@ -107,7 +105,7 @@ class TodoListViewController: UITableViewController {
         
     }
     
-//MARK: - Model Manipulation Methods
+    //MARK: - Model Manipulation Methods
     
     func loadItems(){
 
@@ -115,9 +113,22 @@ class TodoListViewController: UITableViewController {
 
         tableView.reloadData()
     }
+
+
+    override func updateModel(at indexPath: IndexPath) {
+        if let itemForDeletion = todoItems?[indexPath.row] {
+            do {
+                try self.realm.write {
+                    self.realm.delete(itemForDeletion)
+                }
+            } catch {
+                print ("Error deleting item, \(error)")
+            }
+        }
+    }
 }
 
-//MARK: - Search bar methods
+//MARK: - Search Bar Methods
 
 extension TodoListViewController: UISearchBarDelegate {
 
